@@ -67,12 +67,17 @@ src/main/resources/static/     # Static assets (CSS, JS)
 ## To AWS
 - [./images/flow_aws.png](./images/flow_aws.png)
 
-- the application
-- dockerise it
--  ecr
-   - create a resigry
-- buildspec.yml
-- aws code build
+- Continous Integration Step
+
+   - the application
+   - dockerise it
+   -  ecr
+      - create a resigry
+   - buildspec.yml
+   - aws code build
+      - modify the service role (attach policies = container registry full access and power user)
+
+- 
 
 
 

@@ -5,7 +5,6 @@ phases:
     # CodeBuild always pulls the latest image for the specified runtime version below
     runtime-versions:
       java: corretto21
-      docker: 20
     commands:
       - echo Installing Maven...
       - mvn --version
