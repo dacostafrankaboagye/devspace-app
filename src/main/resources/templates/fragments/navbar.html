@@ -1,0 +1,25 @@
+<!-- fragments/navbar.html -->
+<div th:fragment="navbar">
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold text-primary" href="/">DevSpace</a>
+    <div class="collapse navbar-collapse justify-content-end">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item d-flex align-items-center" th:if="${#authorization.expression('isAuthenticated()')}">
+          <div th:replace="~{fragments/avatar :: avatar(${#authentication.principal}, '32px', 'me-2')}"></div>
+          <a class="nav-link fw-semibold" th:href="@{/profile/{username}(username=${#authentication.name})}" th:text="${#authentication.name}">Profile</a>
+          <form th:action="@{/logout}" method="post" class="mb-0 ms-2" style="display:inline;">
+            <button type="submit" class="nav-link btn btn-link fw-semibold p-0" style="border: none; background: none;">Logout</button>
+          </form>
+        </li>
+        <li class="nav-item" th:if="${!#authorization.expression('isAuthenticated()')}">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item" th:if="${!#authorization.expression('isAuthenticated()')}">
+          <a class="nav-link" href="/register">Register</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</div> 

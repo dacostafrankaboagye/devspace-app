@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevSpace | Connect with Developers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light min-vh-100 d-flex flex-column">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-primary fs-3" href="/">
+                <img src="/avatars/avatar1.png" alt="DevSpace Logo" class="rounded-circle" style="width: 40px; height: 40px;">
+                DevSpace
+            </a>
+            <div class="ms-auto d-flex gap-2">
+                <a href="/login" class="btn btn-outline-primary px-4 fw-semibold">Log in</a>
+                <a href="/register" class="btn btn-primary px-4 fw-semibold">Sign up</a>
+            </div>
+        </div>
+    </nav>
+    <main class="container flex-grow-1 d-flex flex-column flex-lg-row align-items-center justify-content-center py-5 gap-5">
+        <div class="flex-grow-1" style="max-width: 520px;">
+            <h1 class="display-4 fw-bold mb-4 lh-tight">
+                Where <span class="text-primary">Developers</span> Connect, Share, and Grow
+            </h1>
+            <p class="lead text-secondary mb-4">
+                DevSpace is the professional social network for developers. Share your projects, discuss code, follow others, and build your dev community.
+            </p>
+            <ul class="list-unstyled mb-4">
+                <li class="d-flex align-items-center mb-3">
+                    <span class="me-3 text-primary fs-4"><i class="bi bi-chat-dots"></i></span>
+                    <span>Post updates, code snippets, and articles</span>
+                </li>
+                <li class="d-flex align-items-center mb-3">
+                    <span class="me-3 text-primary fs-4"><i class="bi bi-people"></i></span>
+                    <span>Comment, like, and follow other developers</span>
+                </li>
+                <li class="d-flex align-items-center mb-3">
+                    <span class="me-3 text-primary fs-4"><i class="bi bi-person-badge"></i></span>
+                    <span>Personalize your profile with a custom avatar</span>
+                </li>
+                <li class="d-flex align-items-center mb-3">
+                    <span class="me-3 text-primary fs-4"><i class="bi bi-gift"></i></span>
+                    <span>100% free for developers</span>
+                </li>
+            </ul>
+            <div class="d-flex gap-3">
+                <a href="/register" class="btn btn-primary btn-lg px-5 fw-bold">Get Started</a>
+                <a href="/login" class="btn btn-outline-primary btn-lg px-5 fw-bold">Log in</a>
+            </div>
+        </div>
+        <div class="flex-grow-1 d-flex align-items-center justify-content-center">
+            <img src="/undraw_pair-programming_9jyg.svg" alt="Pair programming illustration" class="img-fluid" style="max-width: 420px; width: 100%; height: auto;">
+        </div>
+    </main>
+    <footer class="text-center text-secondary py-4 border-top bg-white mt-5">
+        &copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2024</span> DevSpace. Built for developers.
+    </footer>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

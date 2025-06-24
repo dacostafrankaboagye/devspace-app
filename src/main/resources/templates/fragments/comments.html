@@ -1,0 +1,40 @@
+<!-- fragments/comments.html -->
+<div th:fragment="comments(comments, post, parentId, depth)">
+    <h3 th:if="${parentId == null}" class="mb-3">Comments</h3>
+    <div th:if="${comments == null or #lists.isEmpty(comments)}" class="text-muted mb-4">No comments yet.</div>
+    <ul class="list-unstyled ms-0">
+        <li th:each="comment,iter : ${comments}" class="mb-3 position-relative">
+            <div th:with="d=${depth != null ? depth : 1}" th:class="|ps-2 ms-${d > 4 ? 4 : d} position-relative|">
+                <div style="position: absolute; left: 0; top: 0; height: 100%; width: 24px;">
+                    <svg th:if="${d > 1}" width="12" height="100%" style="position: absolute; left: 0; top: 0;" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                        <line x1="6" y1="0" x2="6" y2="100%" stroke="#dee2e6" stroke-width="1.5" />
+                    </svg>
+                </div>
+                <div th:class="${'border-start border-2 border-secondary-subtle ps-2'}" style="border-left: 2px dotted #adb5bd !important;">
+                    <div class="d-flex align-items-center mb-1">
+                        <div th:replace="~{fragments/avatar :: avatar(${comment.author}, '28px', 'me-2')}"></div>
+                        <a th:if="${comment.author != null}" th:href="@{/profile/{username}(username=${comment.author.username})}" class="fw-semibold text-primary me-2" th:text="${comment.author.username}">Username</a>
+                        <span th:if="${comment.author == null}" class="fw-semibold text-secondary me-2">Unknown</span>
+                        <span class="text-muted small" th:text="${comment.createdAt != null ? #temporals.format(comment.createdAt, 'MMM d, yyyy HH:mm') : ''}">Date</span>
+                    </div>
+                    <p th:text="${comment.content}">Comment content...</p>
+                    <button th:if="${d < 5}" class="btn btn-sm btn-outline-secondary mb-2" type="button" data-bs-toggle="collapse" th:attr="data-bs-target='#replyForm-' + ${comment.id}" aria-expanded="false">Reply</button>
+                    <div th:id="'replyForm-' + ${comment.id}" class="collapse">
+                        <form th:action="@{/posts/{id}/comment(id=${post.id})}" method="post" class="mt-2">
+                            <input type="hidden" name="parentId" th:value="${comment.id}" />
+                            <textarea name="content" class="form-control mb-2" maxlength="500" required placeholder="Reply..."></textarea>
+                            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        </form>
+                    </div>
+                    <div th:if="${comment.children != null and !#lists.isEmpty(comment.children) and d < 5}">
+                        <div th:replace="~{fragments/comments :: comments(${comment.children}, ${post}, ${comment.id}, ${d+1})}"></div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <form th:if="${parentId == null}" th:action="@{/posts/{id}/comment(id=${post.id})}" method="post" class="mt-4">
+        <textarea name="content" class="form-control" maxlength="500" required placeholder="Add a comment..."></textarea>
+        <button type="submit" class="btn btn-primary mt-2">Comment</button>
+    </form>
+</div> 

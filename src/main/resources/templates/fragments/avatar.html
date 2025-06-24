@@ -1,0 +1,5 @@
+<!-- fragments/avatar.html -->
+<div th:fragment="avatar(user, size, extraClass)">
+    <img th:if="${user != null and user.avatarPath != null}" th:src="@{${user.avatarPath}}" th:alt="${user != null ? user.username + ' avatar' : 'Default avatar'}" th:style="'width: ' + ${size} + '; height: ' + ${size} + '; object-fit: cover;'" th:class="'rounded-circle ' + ${extraClass}"/>
+    <img th:if="${user == null or user.avatarPath == null}" th:src="@{'/avatars/avatar1.png'}" alt="Default avatar" th:style="'width: ' + ${size} + '; height: ' + ${size} + '; object-fit: cover;'" th:class="'rounded-circle ' + ${extraClass}"/>
+</div> 

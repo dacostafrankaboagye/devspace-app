@@ -1,0 +1,6 @@
+<!-- fragments/flash.html -->
+<div th:fragment="flash">
+    <div th:if="${not #strings.isEmpty(success)}" class="alert alert-success" role="alert"><span th:text="${success}"></span></div>
+    <div th:if="${not #strings.isEmpty(error)}" class="alert alert-danger" role="alert"><span th:text="${error}"></span></div>
+    <div th:if="${not #strings.isEmpty(info)}" class="alert alert-info" role="alert"><span th:text="${info}"></span></div>
+</div> 
