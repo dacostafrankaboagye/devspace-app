@@ -77,7 +77,27 @@ src/main/resources/static/     # Static assets (CSS, JS)
    - aws code build
       - modify the service role (attach policies = container registry full access and power user)
 
-- 
+```text
+The buildspec sets up Java and Maven.
+Logs in to Docker Hub (to pull base images) and ECR (to push your app image).
+Builds your Java app and Docker image.
+Pushes the image to ECR.
+Prepares a file for ECS to deploy the new image.
+```
+
+```mermaid
+flowchart TD
+    A[install phase] --> B[pre_build phase]
+    B --> C[build phase]
+    C --> D[post_build phase]
+    D --> E[artifacts]
+    B1[Login to Docker Hub] --> B
+    B2[Login to ECR] --> B
+    C1[Build Java App] --> C
+    C2[Build Docker Image] --> C
+    D1[Push to ECR] --> D
+    D2[Write imagedefinitions.json] --> D
+```
 
 
 
