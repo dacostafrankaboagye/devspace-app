@@ -120,7 +120,18 @@ flowchart TD
             - chooe launch type compute configuration (fargate)
             - networking - create a new security Group (all traffic, all tcp, source: anywhere)
 
-   - run definition
+   - run
+     - go to the cluster
+       - services
+          - task (bar)
+            - look for the running task 
+              -  get the public IP
+
+```
+<public_ip> : <the port>
+
+example:  http://3.236.43.190:8080
+```
 
 
 ```mermaid
