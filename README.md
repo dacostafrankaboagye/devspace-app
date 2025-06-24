@@ -67,7 +67,7 @@ src/main/resources/static/     # Static assets (CSS, JS)
 ## To AWS
 - [./images/flow_aws.png](./images/flow_aws.png)
 
-- Continous Integration Step
+#### Continous Integration Step
 
    - the application
    - dockerise it
@@ -76,6 +76,7 @@ src/main/resources/static/     # Static assets (CSS, JS)
    - buildspec.yml
    - aws code build
       - modify the service role (attach policies = container registry full access and power user)
+      - create env variables for the docke credentials in there
 
 ```text
 The buildspec sets up Java and Maven.
@@ -99,6 +100,37 @@ flowchart TD
     D2[Write imagedefinitions.json] --> D
 ```
 
+
+- visit the registry, the image should be there
+
+
+#### Continuous Delivery & Continuous Deployment
+
+- create the ecs infrastructure
+   - tasks definition
+      - container details (you can use the registry repository name, just to be consistent, by default it will take the latest image, given the registry repository uri)
+      - expose 8080
+
+   - cluster -> service
+      - specify a name
+      - you realise that no task is running
+         - you can map task directly to the cluster (or)
+         - create a service and map the task to that particular service
+            - so create a service
+            - chooe launch type compute configuration (fargate)
+            - networking - create a new security Group (all traffic, all tcp, source: anywhere)
+
+   - run definition
+
+
+```mermaid
+flowchart TD
+    A[Push Docker image to ECR] --> B[Create ECS Task Definition]
+    B --> C[Create ECS Service]
+    C --> D[Service runs container from ECR image]
+    D --> E[Access app via Load Balancer or Public IP]
+
+```
 
 
 ## License
